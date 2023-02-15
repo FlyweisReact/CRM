@@ -1,19 +1,47 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HOC from "../layout/HOC";
 import { useNavigate } from "react-router-dom";
 import img from "../SVG/home.svg";
+import { useCallback } from "react";
+import axios from "axios";
 
 export const dash = (data) => {
   return data;
 };
 
 const Dashboard = () => {
+  const salesId = localStorage.getItem("salesId");
+  const token = localStorage.getItem("token");
+  const [count, setCount] = useState([]);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const { data } = await axios.get(
+        `https://p4v6aoqh3g.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${salesId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCount(data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [token, salesId]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const countLength = count.length;
+
   const card = [
     {
       title: "Total Customer's",
-      number: "150",
+      number: countLength,
       icon: <i className="fa-solid fa-user text-2xl text-[#4099ff]"></i>,
       link: "/customer",
       bg: "#4099ff",

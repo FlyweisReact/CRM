@@ -27,6 +27,7 @@ const Sidebar = ({ hamb, setHamb }) => {
 
   const logOut = async (e) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("salesId")
     toast.success("Log-Out SuccessFull");
     navigate("/");
   };

@@ -11,7 +11,7 @@ import { Oval } from "react-loader-spinner";
 import img from "../Assets/Group 832 1.svg";
 import axios from "axios";
 
-const Login = () => {
+const `Login = () => {
   const [pass, setPass] = useState(false);
   const [inputpass, setInputpass] = useState(false);
   const navigate = useNavigate();
