@@ -20,7 +20,7 @@ const Dashboard = () => {
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `https://u4x75z11l9.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${salesId}`,
+        `https://p4v6aoqh3g.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${salesId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

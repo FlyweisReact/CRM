@@ -24,7 +24,7 @@ const Login = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://p4v6aoqh3g.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/login",
+        "https://u4x75z11l9.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/login",
         {
           email,
           password,

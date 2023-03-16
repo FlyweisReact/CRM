@@ -22,12 +22,13 @@ const Customers = () => {
 
   const salesId = localStorage.getItem("salesId");
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+ const navigate = useNavigate()
+
 
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `https://u4x75z11l9.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${salesId}`,
+        `https://p4v6aoqh3g.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${salesId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -41,11 +42,11 @@ const Customers = () => {
   }, [token, salesId]);
 
   useEffect(() => {
-    if (!token) {
-      navigate("/");
+    if(!token){
+      navigate("/")
     }
     fetchData();
-  }, [fetchData, navigate, token]);
+  }, [fetchData , navigate , token]);
 
   // Add Customer
   function MyVerticallyCenteredModal(props) {
@@ -58,7 +59,7 @@ const Customers = () => {
       e.preventDefault();
       try {
         const data = await axios.post(
-          "https://u4x75z11l9.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/add",
+          "https://p4v6aoqh3g.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/add",
           {
             name,
             email,
@@ -83,7 +84,7 @@ const Customers = () => {
       e.preventDefault();
       try {
         const data = await axios.put(
-          `https://u4x75z11l9.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${customerId}`,
+          `https://p4v6aoqh3g.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${customerId}`,
           {
             category,
           },
@@ -191,7 +192,7 @@ const Customers = () => {
       e.preventDefault();
       try {
         const data = await axios.put(
-          `https://u4x75z11l9.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${customerId}`,
+          `https://p4v6aoqh3g.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/${customerId}`,
           {
             comment,
           },
@@ -214,7 +215,7 @@ const Customers = () => {
       e.preventDefault();
       try {
         const data = await axios.patch(
-          `https://u4x75z11l9.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/timer/${customerId}`,
+          `https://p4v6aoqh3g.execute-api.ap-south-1.amazonaws.com/dev/api/v1/sales/timer/${customerId}`,
           {
             reminder,
           },
@@ -293,15 +294,12 @@ const Customers = () => {
         onHide={() => setModalShow(false)}
       />{" "}
       <div style={{ display: "flex", gap: "20px", marginBottom: "2%" }}>
-        <img src={img} alt="" style={{ height: "50px", width: "50px" }} />
-        <p
-          style={{
-            color: "black",
-            fontSize: "18px",
-            margin: "0",
-            fontWeight: "bold",
-          }}
-        >
+        <img
+          src={img}
+          alt=""
+         style={{height : '50px' , width : '50px'}}
+        />
+        <p style={{ color: "black", fontSize: "18px", margin: "0" , fontWeight : 'bold' }}>
           Customer List <br />
           <span style={{ fontSize: "14px" }}>All Customer List</span>
         </p>
@@ -312,15 +310,15 @@ const Customers = () => {
           padding: "20px",
           width: "98%",
           marginLeft: "10px",
-          borderRadius: "20px",
+          borderRadius : '20px'
+
         }}
         className="response"
       >
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
-          <span
-            style={{ color: "black", fontSize: "25px", fontWeight: "bold" }}
-          >
+          <span style={{ color: "black", fontSize: "25px", fontWeight: "bold" }}>
             All Customers ( Total : {data?.data?.length} )
+        
           </span>
           <Button
             style={{
@@ -329,7 +327,7 @@ const Customers = () => {
               borderRadius: "50px",
               border: "1px solid #35bc9f",
               padding: "10px",
-              width: "200px",
+              width : "200px" ,
             }}
             onClick={() => {
               setModalShow(true);
