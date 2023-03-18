@@ -246,6 +246,7 @@ const Customers = ({ expiryTimestamp, label }) => {
         toast.success("Reminder  Added");
         props.onHide();
         fetchData();
+        window.location.reload(true)
       } catch (err) {
         toast.success("Reminder  Added");
         props.onHide();

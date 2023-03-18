@@ -10,23 +10,7 @@ import img from "../../../Images/4.png";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import useTimer from "react-timer-hook";
-
-function CountdownTimer({ targetDate }) {
-  const { seconds, minutes, hours, days } = useTimer({
-    expiryTimestamp: targetDate.getTime(),
-    onExpire: () =>alert(`Timer Has been Expired ${targetDate.toString()}`),
-  });
-
-  return (
-    <div>
-      <div>
-        <span>{days}</span> days <span>{hours}</span> hrs <span>{minutes}</span>{" "}
-        min. <span>{seconds}</span> sec.
-      </div>
-    </div>
-  );
-}
+import useTimer from 'react-timer-hook';
 
 const Customers = ({ expiryTimestamp, label }) => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -322,7 +306,29 @@ const Customers = ({ expiryTimestamp, label }) => {
     );
   }
 
+  const targetDates = [
+    new Date('2023-03-25T12:00:00'),
+    new Date('2023-04-01T12:00:00'),
+    new Date('2023-04-08T12:00:00')
+  ];
 
+  const renderTimers = () => {
+    return targetDates.map((targetDate, index) => {
+      const { seconds, minutes, hours, days } = useTimer({
+        expiryTimestamp: targetDate.getTime(),
+        onExpire: () => console.log(`Timer ${index} expired`)
+      });
+
+      return (
+        <div key={index}>
+          <h2>Timer {index + 1}</h2>
+          <div>
+            <span>{days}</span> days <span>{hours}</span> hours <span>{minutes}</span> minutes <span>{seconds}</span> seconds
+          </div>
+        </div>
+      );
+    });
+  };
 
   return (
     <>
@@ -420,6 +426,8 @@ const Customers = ({ expiryTimestamp, label }) => {
           </div>
         </div>
 
+        
+
         {/* Table */}
         <div style={{ overflow: "auto", marginTop: "2%" }}>
           <Table striped bordered hover>
@@ -473,10 +481,7 @@ const Customers = ({ expiryTimestamp, label }) => {
                     {" "}
                     {i.reminder ? (
                       <div style={{ display: "flex", gap: "10px" }}>
-                        <CountdownTimer
-                          key={index}
-                          targetDate={new Date(i.reminder?.slice(0, 16))}
-                        />
+                        {i.reminder.slice(0, 16)}
 
                         <i
                           className="fa-solid fa-plus"

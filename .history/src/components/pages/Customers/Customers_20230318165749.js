@@ -10,23 +10,6 @@ import img from "../../../Images/4.png";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import useTimer from "react-timer-hook";
-
-function CountdownTimer({ targetDate }) {
-  const { seconds, minutes, hours, days } = useTimer({
-    expiryTimestamp: targetDate.getTime(),
-    onExpire: () =>alert(`Timer Has been Expired ${targetDate.toString()}`),
-  });
-
-  return (
-    <div>
-      <div>
-        <span>{days}</span> days <span>{hours}</span> hrs <span>{minutes}</span>{" "}
-        min. <span>{seconds}</span> sec.
-      </div>
-    </div>
-  );
-}
 
 const Customers = ({ expiryTimestamp, label }) => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -154,7 +137,7 @@ const Customers = ({ expiryTimestamp, label }) => {
               </Form>
             ) : (
               <Form onSubmit={postHandler}>
-                <Form.Group>
+                <Form.Group >
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
@@ -253,23 +236,16 @@ const Customers = ({ expiryTimestamp, label }) => {
       }
     };
 
-    const handleDatetimeChange = (e) => {
-      const datetime = new Date(e.target.value);
-      const year = datetime.getFullYear();
-      const month = datetime.getMonth() + 1;
-      const day = datetime.getDate();
-      const hour = datetime.getHours();
-      const minute = datetime.getMinutes();
-      const formattedDateTime = `${year}-${String(month).padStart(
-        2,
-        "0"
-      )}-${String(day).padStart(2, "0")} ${String(hour).padStart(
-        2,
-        "0"
-      )}:${String(minute).padStart(2, "0")}`;
-      setReminder(formattedDateTime);
-      console.log(reminder);
-    };
+    const datetimeInput = document.getElementById('datetime');
+  datetimeInput.addEventListener('change', (e) => {
+    const datetime = new Date(e.target.value);
+    const year = datetime.getFullYear();
+    const month = datetime.getMonth() + 1;
+    const day = datetime.getDate();
+    const hour = datetime.getHours();
+    const minute = datetime.getMinutes();
+    const formattedDateTime = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+    datetimeInput.value = formattedDateTime;
 
     return (
       <Modal
@@ -291,8 +267,8 @@ const Customers = ({ expiryTimestamp, label }) => {
                   <Form.Label>Reminder</Form.Label>
                   <Form.Control
                     type="datetime-local"
-                    // onChange={(e) => setReminder(e.target.value)}
-                    onChange={handleDatetimeChange}
+                    id="datetime"
+                    onChange={(e) => setReminder(e.target.value)}
                   />
                 </Form.Group>
               ) : (
@@ -321,8 +297,6 @@ const Customers = ({ expiryTimestamp, label }) => {
       </Modal>
     );
   }
-
-
 
   return (
     <>
@@ -473,10 +447,7 @@ const Customers = ({ expiryTimestamp, label }) => {
                     {" "}
                     {i.reminder ? (
                       <div style={{ display: "flex", gap: "10px" }}>
-                        <CountdownTimer
-                          key={index}
-                          targetDate={new Date(i.reminder?.slice(0, 16))}
-                        />
+                        {i.reminder}
 
                         <i
                           className="fa-solid fa-plus"

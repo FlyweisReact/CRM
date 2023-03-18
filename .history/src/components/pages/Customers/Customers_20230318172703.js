@@ -10,23 +10,7 @@ import img from "../../../Images/4.png";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import useTimer from "react-timer-hook";
-
-function CountdownTimer({ targetDate }) {
-  const { seconds, minutes, hours, days } = useTimer({
-    expiryTimestamp: targetDate.getTime(),
-    onExpire: () =>alert(`Timer Has been Expired ${targetDate.toString()}`),
-  });
-
-  return (
-    <div>
-      <div>
-        <span>{days}</span> days <span>{hours}</span> hrs <span>{minutes}</span>{" "}
-        min. <span>{seconds}</span> sec.
-      </div>
-    </div>
-  );
-}
+import useTimer from 'react-timer-hook';
 
 const Customers = ({ expiryTimestamp, label }) => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -322,8 +306,6 @@ const Customers = ({ expiryTimestamp, label }) => {
     );
   }
 
-
-
   return (
     <>
       <AddComment show={comment} onHide={() => setComment(false)} />{" "}
@@ -473,10 +455,7 @@ const Customers = ({ expiryTimestamp, label }) => {
                     {" "}
                     {i.reminder ? (
                       <div style={{ display: "flex", gap: "10px" }}>
-                        <CountdownTimer
-                          key={index}
-                          targetDate={new Date(i.reminder?.slice(0, 16))}
-                        />
+                        {i.reminder.slice(0, 16)}
 
                         <i
                           className="fa-solid fa-plus"

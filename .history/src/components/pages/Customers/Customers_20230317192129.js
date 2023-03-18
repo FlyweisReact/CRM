@@ -9,20 +9,30 @@ import { Button, Container, Form } from "react-bootstrap";
 import img from "../../../Images/4.png";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import useTimer from "react-timer-hook";
+import { useNavigate } from "react-router-dom";
 
-function CountdownTimer({ targetDate }) {
-  const { seconds, minutes, hours, days } = useTimer({
-    expiryTimestamp: targetDate.getTime(),
-    onExpire: () =>alert(`Timer Has been Expired ${targetDate.toString()}`),
+function Timer({ id, expiryTimestamp, onExpire }) {
+  const {
+    seconds,
+    minutes,
+    hours,
+    days,
+    isRunning,
+    start,
+    pause,
+    resume,
+    restart,
+  } = useTimer({
+    expiryTimestamp,
+    onExpire,
   });
 
   return (
     <div>
       <div>
-        <span>{days}</span> days <span>{hours}</span> hrs <span>{minutes}</span>{" "}
-        min. <span>{seconds}</span> sec.
+        Timer {id}: {days} days, {hours} hours, {minutes} minutes, {seconds}{" "}
+        seconds
       </div>
     </div>
   );
@@ -141,7 +151,6 @@ const Customers = ({ expiryTimestamp, label }) => {
                     onChange={(e) => setC(e.target.value)}
                   >
                     <option>Select Category</option>
-                    <option value="A+">A+</option>
                     <option value="Good+">Good+</option>
                     <option value="Good">Good</option>
                     <option value="About To Pay">About To Pay</option>
@@ -253,24 +262,6 @@ const Customers = ({ expiryTimestamp, label }) => {
       }
     };
 
-    const handleDatetimeChange = (e) => {
-      const datetime = new Date(e.target.value);
-      const year = datetime.getFullYear();
-      const month = datetime.getMonth() + 1;
-      const day = datetime.getDate();
-      const hour = datetime.getHours();
-      const minute = datetime.getMinutes();
-      const formattedDateTime = `${year}-${String(month).padStart(
-        2,
-        "0"
-      )}-${String(day).padStart(2, "0")} ${String(hour).padStart(
-        2,
-        "0"
-      )}:${String(minute).padStart(2, "0")}`;
-      setReminder(formattedDateTime);
-      console.log(reminder);
-    };
-
     return (
       <Modal
         {...props}
@@ -290,9 +281,8 @@ const Customers = ({ expiryTimestamp, label }) => {
                 <Form.Group className="my-3">
                   <Form.Label>Reminder</Form.Label>
                   <Form.Control
-                    type="datetime-local"
-                    // onChange={(e) => setReminder(e.target.value)}
-                    onChange={handleDatetimeChange}
+                    type="time"
+                    onChange={(e) => setReminder(e.target.value)}
                   />
                 </Form.Group>
               ) : (
@@ -322,7 +312,32 @@ const Customers = ({ expiryTimestamp, label }) => {
     );
   }
 
+  const [timers, setTimers] = useState([]);
 
+  const fetchRemonder = async () => {
+    try {
+      const { data } = await axios.get(
+        "https://u4x75z11l9.execute-api.ap-south-1.amazonaws.com/dev/api/v1/admin/get/time"
+      );
+      setTimers(data.time);
+    } catch (E) {
+      console.log(E);
+    }
+  };
+
+  useEffect(() => {
+    fetchRemonder();
+  }, []);
+
+  console.log(timers)
+
+
+  const expiryTimestamps = timers.map((reminder) => {
+    const dateObject = new Date(reminder);
+    console.log(dateObject)
+    return dateObject.getTime();
+
+  });
 
   return (
     <>
@@ -344,6 +359,19 @@ const Customers = ({ expiryTimestamp, label }) => {
           Customer List <br />
           <span style={{ fontSize: "14px" }}>All Customer List</span>
         </p>
+      </div>
+      <div style={{ color: "black" }}>
+        {/* {timers.map((timer) => (
+          <Timer key={timer.id} {...timer} />
+        ))} */}
+
+        {expiryTimestamps?.map((expiryTimestamp, index) => (
+        <Timer
+          key={index}
+          expiryTimestamp={expiryTimestamp}
+          onExpire={() => console.log(`Timer ${index + 1} expired!`)}
+        />
+      ))}
       </div>
       <div
         style={{
@@ -383,18 +411,12 @@ const Customers = ({ expiryTimestamp, label }) => {
           <div className="items" onClick={() => setQuery("")}>
             All
           </div>
-          <div className="items" onClick={() => setQuery("A+")}>
-            A+
-          </div>
-
-          <div className="items" onClick={() => setQuery("Good")}>
-            Good
-          </div>
-
           <div className="items" onClick={() => setQuery("Good+")}>
             Good+
           </div>
-
+          <div className="items" onClick={() => setQuery("Good")}>
+            Good
+          </div>
           <div className="items" onClick={() => setQuery("About To Pay")}>
             About To Pay
           </div>
@@ -473,10 +495,7 @@ const Customers = ({ expiryTimestamp, label }) => {
                     {" "}
                     {i.reminder ? (
                       <div style={{ display: "flex", gap: "10px" }}>
-                        <CountdownTimer
-                          key={index}
-                          targetDate={new Date(i.reminder?.slice(0, 16))}
-                        />
+                        {i.reminder}
 
                         <i
                           className="fa-solid fa-plus"

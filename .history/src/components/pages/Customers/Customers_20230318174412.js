@@ -15,7 +15,7 @@ import useTimer from "react-timer-hook";
 function CountdownTimer({ targetDate }) {
   const { seconds, minutes, hours, days } = useTimer({
     expiryTimestamp: targetDate.getTime(),
-    onExpire: () =>alert(`Timer Has been Expired ${targetDate.toString()}`),
+    onExpire: () => alert(`Timer Has been Expired ${targetDate.toString()}`),
   });
 
   return (
@@ -418,6 +418,15 @@ const Customers = ({ expiryTimestamp, label }) => {
               onChange={(e) => setQuery(e.target.value)}
             />
           </div>
+        </div>
+
+        <div style={{ color: "black" }}>
+          {remoiderTime?.time?.map((i, index) => (
+            <CountdownTimer
+              key={index}
+              targetDate={new Date(i.reminder?.slice(0, 16))}
+            />
+          ))}
         </div>
 
         {/* Table */}

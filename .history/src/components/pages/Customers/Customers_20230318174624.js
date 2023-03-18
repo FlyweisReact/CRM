@@ -15,7 +15,7 @@ import useTimer from "react-timer-hook";
 function CountdownTimer({ targetDate }) {
   const { seconds, minutes, hours, days } = useTimer({
     expiryTimestamp: targetDate.getTime(),
-    onExpire: () =>alert(`Timer Has been Expired ${targetDate.toString()}`),
+    onExpire: () => toast.info(`Timer Has been Expired ${targetDate.toString()}`),
   });
 
   return (
