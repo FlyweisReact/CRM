@@ -19,7 +19,7 @@ function App() {
       <Routes>
 
       {/* Sales Panel */}
-        <Route path="/salesLogin" element={<Login />} />
+        {/* <Route path="/" element={<Login />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/customer" element={<Customers />} />
 
@@ -28,7 +28,7 @@ function App() {
         <Route path="/flyweis/AdminDashboard" element={<AdminDashboard />} />
           <Route path="/flyweis/admin/customer" element={<AdminCustomer />} />
           <Route path="/flyweis/AdminSales" element={<AdminSales />} />
-          <Route path='/customer/:id' element={<AdminViewCustomer />} />
+          <Route path="/flyweis/AdminviewCustomer" element={<AdminViewCustomer />} />
 
       </Routes>
     </>

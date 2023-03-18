@@ -1,4 +1,6 @@
 /** @format */
+
+import { RiMenu4Line } from "react-icons/ri";
 import img from "../../Images/3.png";
 
 const Navbar = ({ hamb, setHamb }) => {

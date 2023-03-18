@@ -19,7 +19,7 @@ function App() {
       <Routes>
 
       {/* Sales Panel */}
-        <Route path="/salesLogin" element={<Login />} />
+        {/* <Route path="/" element={<Login />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/customer" element={<Customers />} />
 

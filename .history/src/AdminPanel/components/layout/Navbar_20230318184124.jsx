@@ -1,10 +1,14 @@
 /** @format */
-import img from "../../Images/3.png";
+
+import { RiMenu4Line } from "react-icons/ri";
+import { FiSettings } from "react-icons/fi";
+import { IoMdClose } from "react-icons/io";
+import { useState } from "react";
 
 const Navbar = ({ hamb, setHamb }) => {
   return (
     <>
-      <div className="my-1 rounded-sm  p-4 py-3 items-center space-x-4 BigNav">
+    <div className="my-1 rounded-sm  p-4 py-3 items-center space-x-4 BigNav">
         <img
           src={img}
           alt=""
