@@ -353,6 +353,7 @@ input:checked + .slider::before {
   display: flex;
   color: #fff;
   height: 50px;
+  align-items: center;
 }
 
 .myNav ul li {
@@ -365,6 +366,15 @@ input:checked + .slider::before {
   color: #001721;
   padding-top: 10px;
   border-radius: 50px;
+}
+
+.myNav .active {
+    background-color: #fff;
+  color: #001721;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 50px;
+  height: 100%;
 }
 
 .BigNav {
@@ -452,3 +462,4 @@ input:checked + .slider::before {
   width: 150px;
   height: 50px;
 }
+

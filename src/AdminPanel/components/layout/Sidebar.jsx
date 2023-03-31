@@ -2,7 +2,7 @@
 
 import React from "react";
 import { RiCloseLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdDashboardCustomize } from "react-icons/md";
@@ -12,6 +12,7 @@ import logo from './Group 1.png'
 
 const Sidebar = ({ hamb, setHamb }) => {
   const navigate = useNavigate();
+  const location = useLocation()
 
   const nav = [
     {
@@ -32,10 +33,11 @@ const Sidebar = ({ hamb, setHamb }) => {
   ];
 
   const logOut = async (e) => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     toast.success("Log-Out SuccessFull");
     navigate("/");
   };
+
 
   return (
     <>
@@ -71,11 +73,11 @@ const Sidebar = ({ hamb, setHamb }) => {
         <nav className="py-6">
           {nav.map((nav) => {
             return (
-              <Link to={nav.link} key={nav.name} className=""    style={{ textDecoration: " none" }}>
+              <Link to={nav.link} key={nav.name} style={{ textDecoration: " none" }}>
                 <div
                   className="myNav"
                 >
-                  <ul tabindex="0">
+                  <ul className={nav.link === location.pathname ? "active" : ""}>
                     <li style={{ marginTop: "5px " }}> {nav.icon} </li>
                     <li> {nav.name} </li>
                   </ul>
@@ -88,7 +90,7 @@ const Sidebar = ({ hamb, setHamb }) => {
             onClick={() => logOut()}
             className="myNav"
           >
-            <ul tabindex="0">
+            <ul>
               <li style={{ marginTop: "5px " }}><RiLogoutBoxLine className="text-xl mr-3" /> </li>
               <li> Logout </li>
             </ul>

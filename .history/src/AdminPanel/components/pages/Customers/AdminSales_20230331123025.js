@@ -22,7 +22,7 @@ const AdminSales = () => {
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/allsales",
+        "http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/allsales",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ const AdminSales = () => {
       e.preventDefault();
       try {
         const data = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/addsales",
+          "http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/addsales",
           { name, email, mobile, password },
           {
             headers: {
@@ -159,7 +159,7 @@ const AdminSales = () => {
   const deleteHandler = async (id) => {
     try {
       const data = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/delete/sales/${id}`,
+        `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/delete/sales/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

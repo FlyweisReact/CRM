@@ -11,7 +11,7 @@ import { Oval } from "react-loader-spinner";
 import img from "../Assets/Group 832 1.svg";
 import axios from "axios";
 
-const AdminLogin = () => {
+const Login = () => {
   const [pass, setPass] = useState(false);
   const [inputpass, setInputpass] = useState(false);
   const navigate = useNavigate();
@@ -24,15 +24,16 @@ const AdminLogin = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/login",
+        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/sales/login",
         {
           email,
           password,
         }
       );
       localStorage.setItem("token", data.token);
-      navigate("/flyweis/AdminDashboard");
-      toast.success("Welcome Admin");
+      localStorage.setItem("salesId", data.salesId);
+      navigate("/dashboard");
+      toast.success("Welcome");
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -101,13 +102,10 @@ const AdminLogin = () => {
                 </div>
               )}
             </button>
-            <button
-              className="py-2 cursor-pointer tracking-wider bg-[rgb(241,146,46)] flex justify-center items-center w-full rounded-md font-medium   "
-              onClick={() => navigate("/salesLogin")}
-            >
+            <button className="py-2 cursor-pointer tracking-wider bg-[rgb(241,146,46)] flex justify-center items-center w-full rounded-md font-medium" onClick={()}>
               <div className="flex items-center">
                 <span className="flex items-center justify-center">
-                  Sales Login
+                  Admin Panel
                 </span>
               </div>
             </button>
@@ -118,4 +116,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default Login;

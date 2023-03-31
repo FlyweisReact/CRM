@@ -1,54 +1,72 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import HOC from "../layout/HOC";
 import { useNavigate } from "react-router-dom";
 import img from "../SVG/home.svg";
-import { useCallback } from "react";
 import axios from "axios";
 
 export const dash = (data) => {
   return data;
 };
 
-const Dashboard = () => {
-  const salesId = localStorage.getItem("salesId");
-  const token = localStorage.getItem("token");
-  const [count, setCount] = useState([]);
+const AdminDashboard = () => {
+  const [customerCount, setCustomerCount] = useState([]);
+  const [saleCount, setSaleCount] = useState([]);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
-  const fetchData = useCallback(async () => {
+  const totalCustomer = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/sales/${salesId}`,
+        "http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/cuestomer/total",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      setCount(data.data);
+      setCustomerCount(data.total);
     } catch (err) {
       console.log(err);
     }
-  }, [token, salesId]);
+  }, [token]);
+
+  const totalSales = useCallback(async () => {
+    try {
+      const { data } = await axios.get(
+        "http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/allsales",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setSaleCount(data.total.length);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [token]);
 
   useEffect(() => {
-    if (!token) {
-      navigate("/");
-    }
-    fetchData();
-  }, [fetchData, token, navigate]);
-
-  const countLength = count.length;
+    totalCustomer();
+    totalSales();
+  }, [totalCustomer, totalSales]);
 
   const card = [
     {
       title: "Total Customer's",
-      number: countLength,
+      number: customerCount,
       icon: <i className="fa-solid fa-user text-2xl text-[#4099ff]"></i>,
-      link: "/customer",
+      link: "/flyweis/admin/customer",
       bg: "#4099ff",
+    },
+    {
+      title: "Total Sales's Members",
+      number: saleCount,
+      icon: <i className="fa-solid fa-user-tie text-2xl text-[#5b63d9]"></i>,
+      link: "/flyweis/AdminSales",
+      bg: "#5b63d9",
     },
   ];
 
@@ -70,11 +88,11 @@ const Dashboard = () => {
         </p>
       </div>
 
-      <section className="grid md:grid-cols-4 grid-cols-2 gap-y-6 gap-x-4">
+      <section className="grid md:grid-cols-4 grid-cols-2 gap-y-6 gap-x-4 dashBoardCard">
         {card.map((card, index) => {
           return (
             <div
-              className="px-5 py-8   shadow-xl   BigOuter"
+              className="px-5 py-8  shadow-xl   BigOuter"
               key={index}
               onClick={() => navigate(`${card.link ? card.link : "#"}`)}
               style={{ backgroundColor: `${card.bg}` }}
@@ -110,4 +128,4 @@ const Dashboard = () => {
   );
 };
 
-export default HOC(Dashboard);
+export default HOC(AdminDashboard);

@@ -40,7 +40,7 @@ const AdminViewCustomer = () => {
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/cues/${id}`,
+        `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/cues/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ const AdminViewCustomer = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/add/customer",
+          "http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/add/customer",
           {
             salesId: id,
             name,
@@ -154,7 +154,7 @@ const AdminViewCustomer = () => {
       e.preventDefault();
       try {
         const data = await axios.put(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/update/${customerId}`,
+          `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/update/${customerId}`,
           {
             comment,
           },
@@ -177,7 +177,7 @@ const AdminViewCustomer = () => {
       e.preventDefault();
       try {
         const data = await axios.patch(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/sales/timer/${customerId}`,
+          `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/sales/timer/${customerId}`,
           {
             reminder,
           }

@@ -17,7 +17,7 @@ const AdminCustomer = () => {
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/cuestomer/all",
+        "http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/cuestomer/all",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const AdminCustomer = () => {
   const filterByDate = async (Day) => {
     try {
       const { data } = await axios.get(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/filter?filter=${Day}`
+        `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/filter?filter=${Day}`
       );
       setData(data.message);
     } catch (e) {
@@ -47,7 +47,7 @@ const AdminCustomer = () => {
   const filterByDate2 = async () => {
     try {
       const { data } = await axios.get(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/filter?startDate=${startDate}&endDate=${endData}`
+        `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/filter?startDate=${startDate}&endDate=${endData}`
       );
       setData(data.message);
     } catch (e) {
@@ -67,7 +67,7 @@ const AdminCustomer = () => {
   const deleteHandler = async (id) => {
     try {
       const data = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/admin/cuestomer/delete/${id}`,
+        `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/cuestomer/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

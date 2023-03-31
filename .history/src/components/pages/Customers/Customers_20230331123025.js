@@ -44,7 +44,7 @@ const Customers = ({ expiryTimestamp, label }) => {
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/sales/${salesId}`,
+        `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/sales/${salesId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ const Customers = ({ expiryTimestamp, label }) => {
       e.preventDefault();
       try {
         const data = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/sales/add",
+          "http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/sales/add",
           {
             name,
             email,
@@ -100,7 +100,7 @@ const Customers = ({ expiryTimestamp, label }) => {
       e.preventDefault();
       try {
         const data = await axios.put(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/sales/${customerId}`,
+          `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/sales/${customerId}`,
           {
             category,
           },
@@ -209,7 +209,7 @@ const Customers = ({ expiryTimestamp, label }) => {
       e.preventDefault();
       try {
         const data = await axios.put(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/sales/${customerId}`,
+          `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/sales/${customerId}`,
           {
             comment,
           },
@@ -232,7 +232,7 @@ const Customers = ({ expiryTimestamp, label }) => {
       e.preventDefault();
       try {
         const data = await axios.patch(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:6699/api/v1/sales/timer/${customerId}`,
+          `http://ec2-13-232-120-74.ap-south-1.compute.amazonaws.com:3000/api/v1/sales/timer/${customerId}`,
           {
             reminder,
           },
