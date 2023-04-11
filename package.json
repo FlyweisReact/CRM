@@ -1,5 +1,6 @@
 {
   "version": "0.1.0",
+  "homepage": "https://flyweis.education/",
   "private": true,
   "engines": {
     "node": "16.16.0"
