@@ -114,7 +114,6 @@ const AssinedCustomerSales = () => {
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>SNo.</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th> Phone Number </th>
@@ -126,7 +125,6 @@ const AssinedCustomerSales = () => {
                   {data?.result?.map((i, index) =>
                     i.status === "active" ? (
                       <tr key={index}>
-                      <td> {index + 1} </td>
                         <td> {i.cuestomerId?.[0]?.Id?.name} </td>
                         <td> {i.cuestomerId?.[0]?.Id?.email} </td>
                         <td> {i.cuestomerId?.[0]?.Id?.mobile} </td>

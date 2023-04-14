@@ -114,7 +114,7 @@ const AssinedCustomerSales = () => {
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>SNo.</th>
+                    <th>Name</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th> Phone Number </th>

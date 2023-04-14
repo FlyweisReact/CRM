@@ -85,13 +85,20 @@ const AdminCustomer = () => {
   return (
     <>
       <div style={{ display: "flex", gap: "20px", marginBottom: "2%" }}>
-      <img src={img} alt="" style={{ height: "50px", width: "50px" }} />
-        <p    style={{
-            color: "black",
-            fontSize: "18px",
-            margin: "0",
-            fontWeight: "bold",
-          }}>
+        <img
+          src={img}
+          alt=""
+          style={{
+            backgroundColor: "#4099ff",
+            padding: "8px",
+            borderRadius: "5px",
+            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            width: "40px",
+            height: "40px",
+            marginTop: "5px",
+          }}
+        />
+        <p style={{ color: "black", fontSize: "18px", margin: "0" }}>
           Customer List <br />
           <span style={{ fontSize: "14px" }}>All Customer List</span>
         </p>
@@ -109,7 +116,7 @@ const AdminCustomer = () => {
           <span
             style={{ color: "black", fontSize: "25px", fontWeight: "bold" }}
           >
-            All Customers ( Total : {data?.length} )
+            All Customers ( Total : {data?.data?.length} )
           </span>
         </div>
 
@@ -234,7 +241,6 @@ const AdminCustomer = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>SNo.</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th> Phone Number </th>
@@ -247,7 +253,6 @@ const AdminCustomer = () => {
             <tbody>
               {filterData?.map((i, index) => (
                 <tr key={index}>
-                  <td> {index + 1} </td>
                   <td> {i.name} </td>
                   <td> {i.email} </td>
                   <td> {i.mobile} </td>

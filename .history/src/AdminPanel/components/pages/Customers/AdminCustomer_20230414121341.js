@@ -234,7 +234,7 @@ const AdminCustomer = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>SNo.</th>
+                <th>Name</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th> Phone Number </th>
@@ -247,7 +247,6 @@ const AdminCustomer = () => {
             <tbody>
               {filterData?.map((i, index) => (
                 <tr key={index}>
-                  <td> {index + 1} </td>
                   <td> {i.name} </td>
                   <td> {i.email} </td>
                   <td> {i.mobile} </td>

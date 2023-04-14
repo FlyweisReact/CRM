@@ -247,7 +247,7 @@ const AdminCustomer = () => {
             <tbody>
               {filterData?.map((i, index) => (
                 <tr key={index}>
-                  <td> {index + 1} </td>
+                  <td> {index +  1} </td>
                   <td> {i.name} </td>
                   <td> {i.email} </td>
                   <td> {i.mobile} </td>

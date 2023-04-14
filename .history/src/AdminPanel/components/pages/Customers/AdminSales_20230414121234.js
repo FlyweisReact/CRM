@@ -194,12 +194,7 @@ const AdminSales = () => {
       <div style={{ display: "flex", gap: "20px", marginBottom: "2%" }}>
         <img src={img} alt="" style={{ height: "50px", width: "50px" }} />
         <p
-          style={{
-            color: "black",
-            fontSize: "18px",
-            margin: "0",
-            fontWeight: "bold",
-          }}
+       style={{ color: "black", fontSize: "18px", margin: "0" }}
         >
           Sales List <br />
           <span style={{ fontSize: "14px" }}>All Sales List</span>
@@ -261,7 +256,6 @@ const AdminSales = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>SNo.</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th> Phone Number </th>
@@ -273,7 +267,6 @@ const AdminSales = () => {
             <tbody>
               {filterData?.map((i, index) => (
                 <tr key={index}>
-                  <td> {index + 1} </td>
                   <td> {i.name} </td>
                   <td> {i.email} </td>
                   <td> {i.mobile} </td>

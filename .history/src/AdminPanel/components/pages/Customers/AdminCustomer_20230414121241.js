@@ -109,7 +109,7 @@ const AdminCustomer = () => {
           <span
             style={{ color: "black", fontSize: "25px", fontWeight: "bold" }}
           >
-            All Customers ( Total : {data?.length} )
+            All Customers ( Total : {data?.data?.length} )
           </span>
         </div>
 
@@ -234,7 +234,6 @@ const AdminCustomer = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>SNo.</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th> Phone Number </th>
@@ -247,7 +246,6 @@ const AdminCustomer = () => {
             <tbody>
               {filterData?.map((i, index) => (
                 <tr key={index}>
-                  <td> {index + 1} </td>
                   <td> {i.name} </td>
                   <td> {i.email} </td>
                   <td> {i.mobile} </td>
